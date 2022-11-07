@@ -1,0 +1,5368 @@
+{
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "FireBoom-server",
+        "title": "FireBoom-server Swagger API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:9123",
+    "paths": {
+        "/api/v1/CheckDBConn": {
+            "post": {
+                "description": "检查数据源链接",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "datasource"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "数据源名称",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "数据源类型",
+                        "name": "sourceType",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "数据源配置",
+                        "name": "config",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "数据源开关 0-开 1-关",
+                        "name": "switch",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth": {
+            "get": {
+                "description": "查询身份验证信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.FbAuthentication"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "put": {
+                "description": "修改身份验证信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "名称",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "验证供应商类型",
+                        "name": "authSupplier",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "开关",
+                        "name": "switchState",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "验证配置",
+                        "name": "config",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "添加身份验证信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "名称",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "验证供应商类型",
+                        "name": "authSupplier",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "开关",
+                        "name": "switchState",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "验证配置",
+                        "name": "config",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/:id": {
+            "delete": {
+                "description": "删除身份验证信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功"
+                    },
+                    "400": {
+                        "description": "删除失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/brand": {
+            "get": {
+                "description": "查询品牌配置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth/brand"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.LoginBrandConfig"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "修改品牌配置链接器",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth/brand"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "darkPrimaryColor",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "boolean",
+                        "name": "isDarkModeEnabled",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "name": "primaryColor",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "name": "darkLogoUrl",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "name": "logoUrl",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "name": "slogan",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "name": "style",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.LoginBrandConfig"
+                        }
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/getDiscoveryURL": {
+            "get": {
+                "description": "获取服务发现地址",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "issuer地址",
+                        "name": "issuer",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "供应商id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/home": {
+            "get": {
+                "description": "查询首页数据",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth/home"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.AuthHome"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/home/active": {
+            "get": {
+                "description": "查询活跃信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth/home"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "结束日期",
+                        "name": "endDate",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.Active"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/hooks": {
+            "get": {
+                "description": "获取钩子内容",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "hook"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "钩子路径",
+                        "name": "path",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.HookStruct"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "执行钩子",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "hook"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "路径",
+                        "name": "path",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "依赖数组,swagger的问题 把depend1中的1给去掉哈",
+                        "name": "depend1",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "object",
+                        "description": "输入",
+                        "name": "input",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "钩子内容",
+                        "name": "script",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "钩子类型",
+                        "name": "scriptType",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/linker": {
+            "get": {
+                "description": "查询链接器",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth/linker"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.Linker"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "修改链接器",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth/linker"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "开关，true为创建链接器，false为删除链接器",
+                        "name": "enable",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "配置，创建和修改配置需要传入该字段",
+                        "name": "config",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.Linker"
+                        }
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/loginConfig": {
+            "get": {
+                "description": "查询登录配置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth/loginConfig"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.LoginConfig"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "修改登录配置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth/loginConfig"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "signInMode",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "socialSignInConnectorTargets",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "已开启的登录方式",
+                        "name": "socialSignInConnectorTargets",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.LoginConfig"
+                        }
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/otherConfig": {
+            "get": {
+                "description": "查询其他配置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth/otherConfig"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.LoginOtherConfig"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "查询其他配置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth/otherConfig"
+                ],
+                "parameters": [
+                    {
+                        "type": "boolean",
+                        "description": "开关 true开 false关",
+                        "name": "Enabled",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "条款链接",
+                        "name": "ContentUrl",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.LoginOtherConfig"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/redirectUrl": {
+            "get": {
+                "description": "获取重定向url",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "修改重定向url",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "parameters": [
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "重定向url数组",
+                        "name": "redirectURLs",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/dataSource": {
+            "get": {
+                "description": "查询数据源信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "datasource"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据源类型",
+                        "name": "datasourceType",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.FbDataSource"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "put": {
+                "description": "修改数据源信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "datasource"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "数据源名称",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "数据源类型",
+                        "name": "sourceType",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "数据源配置",
+                        "name": "config",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "存储数据源信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "datasource"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "数据源名称",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "数据源类型",
+                        "name": "sourceType",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "数据源配置",
+                        "name": "config",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "数据源开关 0-开 1-关",
+                        "name": "switch",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/dataSource/:id": {
+            "delete": {
+                "description": "删除数据源信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "datasource"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据源id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功"
+                    },
+                    "400": {
+                        "description": "删除失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/dataSource/content/:id": {
+            "put": {
+                "description": "修改数据源内容",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "datasource"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据源id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "数据源内容",
+                        "name": "content",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/dataSource/example": {
+            "get": {
+                "description": "查询实例数据源列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "datasource"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据源类型",
+                        "name": "datasourceType",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/http.ExampleDataSource"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/dataSource/import": {
+            "post": {
+                "description": "导入外部数据源信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "datasource"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "数据源文件",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "导入成功"
+                    },
+                    "400": {
+                        "description": "导入失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/draft": {
+            "put": {
+                "description": "更新草稿内容",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "draft"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "内容",
+                        "name": "content",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "内容",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更新成功"
+                    },
+                    "400": {
+                        "description": "更新失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/draft/:id": {
+            "get": {
+                "description": "根据数据源id获取草稿",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "draft"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据源id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "delete": {
+                "description": "删除草稿",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "draft"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据源id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功"
+                    },
+                    "400": {
+                        "description": "删除失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/env": {
+            "get": {
+                "description": "查询环境变量信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "env"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.FbEnv"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "put": {
+                "description": "修改环境变量",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "env"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "key",
+                        "name": "key",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "开发环境",
+                        "name": "devEnv",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "生产环境",
+                        "name": "proEnv",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "环境类型 1-环境变量 2-系统变量",
+                        "name": "envType",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "添加环境变量",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "env"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "key",
+                        "name": "key",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "开发环境",
+                        "name": "devEnv",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "生产环境",
+                        "name": "proEnv",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "环境类型 1-环境变量 2-系统变量",
+                        "name": "envType",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/env/:id": {
+            "delete": {
+                "description": "删除环境变量",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "env"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功"
+                    },
+                    "400": {
+                        "description": "删除失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/env/keys": {
+            "get": {
+                "description": "查询环境变量keys",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "env"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "key",
+                        "name": "key",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.FbEnv"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/file": {
+            "delete": {
+                "description": "删除文件",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "file"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功"
+                    },
+                    "400": {
+                        "description": "删除失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/file/:type": {
+            "get": {
+                "description": "查询文件",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "file"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "类型 1-oas文件 2-sqlite文件",
+                        "name": "type",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "文件名搜索关键字",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/file/removeFile": {
+            "delete": {
+                "description": "删除文件",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "file"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "文件名",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "文件类型 ，1-oas文件 2-sqlite文件",
+                        "name": "type",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功"
+                    },
+                    "400": {
+                        "description": "删除失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/file/upload": {
+            "post": {
+                "description": "添加文件",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "file"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "file",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "file",
+                        "name": "type",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/file/uploadFile": {
+            "post": {
+                "description": "添加文件",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "file"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "file",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "文件类型 ，1-oas文件 2-sqlite文件",
+                        "name": "type",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/file/uploadFile/postToSwag": {
+            "post": {
+                "description": "postman转swagger",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "file"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "file",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功"
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/global": {
+            "post": {
+                "description": "修改全局配置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "global"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "key=路径",
+                        "name": "key",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "val=值",
+                        "name": "val",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/home": {
+            "get": {
+                "description": "获取首页数据",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "home"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.Home"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/home/bulletin": {
+            "get": {
+                "description": "获取公告",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "home"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.HomeBulletin"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/hook/depend": {
+            "post": {
+                "description": "保存钩子依赖",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "hook"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "路径",
+                        "name": "path",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "依赖数组,swagger的问题 把depend1中的1给去掉哈",
+                        "name": "depend1",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/hook/input": {
+            "post": {
+                "description": "保存钩子输入参数",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "hook"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "路径",
+                        "name": "path",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "object",
+                        "description": "输入",
+                        "name": "input",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/hook/script": {
+            "post": {
+                "description": "保存钩子内容",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "hook"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "钩子路径",
+                        "name": "path",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "钩子类型",
+                        "name": "switch",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/hook/switch": {
+            "post": {
+                "description": "保存钩子依赖",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "hook"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "路径",
+                        "name": "path",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "开关 true开 false 关",
+                        "name": "switch",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/hook/types": {
+            "get": {
+                "description": "获取类型文件",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "hook"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "钩子路径",
+                        "name": "path",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/model/graphql/:id": {
+            "post": {
+                "description": "内省",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "prisma"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据源id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "这个没啥用,可以不传",
+                        "name": "operationName",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "阐述",
+                        "name": "variables",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "schema内容",
+                        "name": "query",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "内省成功"
+                    },
+                    "400": {
+                        "description": "内省失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth": {
+            "get": {
+                "description": "查询身份验证信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "每页大小",
+                        "name": "pageSize",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "当前页",
+                        "name": "currPage",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "总页数",
+                        "name": "totalPage",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "搜索框(用户名/邮箱/手机号)",
+                        "name": "search",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/http.OauthUserLimitResp"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "创建用户",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "创建账号类型0-用户名密码 1-手机号 2-邮箱",
+                        "name": "createType",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户名",
+                        "name": "userName",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "手机号",
+                        "name": "mobile",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "邮箱",
+                        "name": "email",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "密码",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "确认密码",
+                        "name": "rePassword",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "发送首次登陆地址",
+                        "name": "sendAddress",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "创建成功"
+                    },
+                    "400": {
+                        "description": "创建失败"
+                    }
+                }
+            },
+            "delete": {
+                "description": "删除用户",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "parameters": [
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "id列表",
+                        "name": "ids",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功"
+                    },
+                    "400": {
+                        "description": "删除失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/:id": {
+            "get": {
+                "description": "获取用户详细信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/http.OauthUserDetailResp"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "put": {
+                "description": "修改用户",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "姓名",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户名",
+                        "name": "userName",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "昵称",
+                        "name": "nickName",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "性别",
+                        "name": "gender",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "生日",
+                        "name": "birthday",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "手机号",
+                        "name": "mobile",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "邮箱",
+                        "name": "email",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "密码",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "国家代码",
+                        "name": "countryCode",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "所在地",
+                        "name": "address",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "公司",
+                        "name": "company",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "城市",
+                        "name": "city",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "省/直辖市(手填)",
+                        "name": "province",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "街道地址",
+                        "name": "streetAddress",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "原系统id",
+                        "name": "externalId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "邮政编码",
+                        "name": "postalCode",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/ForcedOffline/:id": {
+            "get": {
+                "description": "强制下线",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功"
+                    },
+                    "400": {
+                        "description": "失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/changeDB/:id": {
+            "post": {
+                "description": "切换数据源",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据库id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/http.TablesResp"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/dblist": {
+            "post": {
+                "description": "数据源列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据库id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/http.TablesResp"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/export": {
+            "get": {
+                "description": "导出",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "parameters": [
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "id列表",
+                        "name": "ids",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "导出",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/import": {
+            "post": {
+                "description": "导入",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/password": {
+            "put": {
+                "description": "修改用户密码",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "密码",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/role/:id": {
+            "get": {
+                "description": "获取用户角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.FbRole"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "修改用户角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "角色id",
+                        "name": "roleId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "权限数组",
+                        "name": "role",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/status": {
+            "put": {
+                "description": "修改状态",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "parameters": [
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "id列表",
+                        "name": "ids",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "0锁定 1解锁",
+                        "name": "status",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/tables/:id": {
+            "get": {
+                "description": "查询表列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据库id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/http.TablesResp"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/tables/:id/export": {
+            "post": {
+                "description": "导出",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据库id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/http.TablesResp"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/tables/:id/import": {
+            "post": {
+                "description": "导入",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "oauth"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据库id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/http.TablesResp"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/operateApi": {
+            "get": {
+                "description": "查询api列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/http.dirTreeNodeResp"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "创建api文件",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "方法Get、POST等等",
+                        "name": "Method",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "类型  queries,mutations,subscriptions",
+                        "name": "OperationType",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "状态 1共有 2私有",
+                        "name": "Status",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "说明",
+                        "name": "Remark",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "是否合法 1合法 2非法",
+                        "name": "Legal",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "路径",
+                        "name": "Path",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "内容",
+                        "name": "Content",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "开关",
+                        "name": "disable",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/operateApi/:id": {
+            "get": {
+                "description": "查询api文件内容",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.FbOperations"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "put": {
+                "description": "更新api",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "方法Get、POST等等",
+                        "name": "Method",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "类型  queries,mutations,subscriptions",
+                        "name": "OperationType",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "状态 1共有 2私有",
+                        "name": "Status",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "路径",
+                        "name": "Path",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "说明",
+                        "name": "Remark",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "是否合法 1合法 2非法",
+                        "name": "Legal",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "内容",
+                        "name": "Content",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "开关",
+                        "name": "disable",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更改成功"
+                    },
+                    "400": {
+                        "description": "更改失败"
+                    }
+                }
+            },
+            "delete": {
+                "description": "删除文件",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功"
+                    },
+                    "400": {
+                        "description": "删除失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/operateApi/content/:id": {
+            "put": {
+                "description": "更新api",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "内容",
+                        "name": "Content",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "请求类型 queries,mutations,subscriptions",
+                        "name": "operation_type",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更改成功"
+                    },
+                    "400": {
+                        "description": "更改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/operateApi/copy": {
+            "post": {
+                "description": "创建api文件",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "路径",
+                        "name": "path",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/operateApi/dir": {
+            "put": {
+                "description": "重命名文件夹",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "旧路径",
+                        "name": "oldPath",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "新路径",
+                        "name": "newPath",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "开关",
+                        "name": "disable",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "创建api文件夹",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "路径",
+                        "name": "path",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            },
+            "delete": {
+                "description": "删除文件夹",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功"
+                    },
+                    "400": {
+                        "description": "删除失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/operateApi/getGenerateSchema": {
+            "get": {
+                "description": "获取生成的schema",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功"
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/operateApi/hooks": {
+            "get": {
+                "description": "获取全局hooks",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.Hooks"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            },
+            "put": {
+                "description": "修改全局hook",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "钩子名称",
+                        "name": "HookName",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "内容",
+                        "name": "content",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "开关",
+                        "name": "hookSwitch",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "onRequest , onResponse",
+                        "name": "hooksType",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/operateApi/hooks/:id": {
+            "get": {
+                "description": "查询api钩子列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/http.dirTreeNodeResp"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "put": {
+                "description": "修改hooks",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "钩子名称",
+                        "name": "HookName",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "内容",
+                        "name": "content",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "开关",
+                        "name": "hookSwitch",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "preResolve, postResolve, customeResolve, mutatingPostResolve",
+                        "name": "hooksType",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/operateApi/json": {
+            "get": {
+                "description": "获取json",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "mock开关",
+                        "name": "mockSwitch",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "内容",
+                        "name": "content",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功"
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/operateApi/mock/:id": {
+            "get": {
+                "description": "获取mock",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.Mock"
+                        }
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            },
+            "put": {
+                "description": "修改mock",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "mock开关",
+                        "name": "mockSwitch",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "内容",
+                        "name": "content",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功"
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/operateApi/sdk": {
+            "get": {
+                "description": "获取sdk",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "mock开关",
+                        "name": "mockSwitch",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "内容",
+                        "name": "content",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功"
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/operateApi/setting": {
+            "get": {
+                "description": "获取operation设置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.OperationSetting"
+                        }
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/operateApi/setting/:id": {
+            "get": {
+                "description": "获取operation设置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "设置类型 1 operation单个设置 2 operation全局设置",
+                        "name": "settingType",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.OperationSetting"
+                        }
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            },
+            "put": {
+                "description": "修改operation设置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "operateApi"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "设置类型 1operation单个设置 2operation全局设置",
+                        "name": "settingType",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "需要授权",
+                        "name": "authenticationRequired",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "开启缓存",
+                        "name": "cachingEnable",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "最大时长",
+                        "name": "cachingMaxAge",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "重校验时长",
+                        "name": "cachingStaleWhileRevalidate",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "开启实时",
+                        "name": "liveQueryEnable",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "轮询间隔",
+                        "name": "liveQueryPollingIntervalSeconds",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/prisma/dmf/:id": {
+            "get": {
+                "description": "GetDMF",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "prisma"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据源id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功"
+                    },
+                    "400": {
+                        "description": "失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/prisma/introspection/:id": {
+            "post": {
+                "description": "内省",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "prisma"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据源id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "内省成功"
+                    },
+                    "400": {
+                        "description": "内省失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/prisma/migrate/:id": {
+            "post": {
+                "description": "迁移",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "prisma"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "数据源id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "schema内容",
+                        "name": "schema",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "迁移成功"
+                    },
+                    "400": {
+                        "description": "迁移失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/role": {
+            "get": {
+                "description": "查询角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "role"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.FbRole"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "put": {
+                "description": "修改角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "role"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "编码",
+                        "name": "code",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "说明",
+                        "name": "remark",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "添加角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "role"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "编码",
+                        "name": "code",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "说明",
+                        "name": "remark",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/role/:id": {
+            "delete": {
+                "description": "删除角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "role"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功"
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/s3Upload/detail": {
+            "post": {
+                "description": "文件详情",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "s3Upload"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "储存桶id",
+                        "name": "bucketID",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "文件名称",
+                        "name": "fileName",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.UploadedFile"
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/s3Upload/download": {
+            "get": {
+                "description": "下载",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "s3Upload"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "储存桶id",
+                        "name": "bucketID",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "文件名称",
+                        "name": "fileName",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "下载成功"
+                    },
+                    "400": {
+                        "description": "下载失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/s3Upload/list": {
+            "get": {
+                "description": "查询文件列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "s3Upload"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "储存桶id",
+                        "name": "bucketID",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "前缀",
+                        "name": "filePrefix",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.UploadedFile"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/s3Upload/remove": {
+            "post": {
+                "description": "删除",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "s3Upload"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "储存桶id",
+                        "name": "bucketID",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "文件名称",
+                        "name": "fileName",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功"
+                    },
+                    "400": {
+                        "description": "删除失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/s3Upload/rename": {
+            "put": {
+                "description": "重命名",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "s3Upload"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "储存桶id",
+                        "name": "bucketID",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "旧名称",
+                        "name": "oldName",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "新名词",
+                        "name": "newName",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "重命名成功"
+                    },
+                    "400": {
+                        "description": "重命名失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/s3Upload/upload": {
+            "post": {
+                "description": "oss上传",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "s3Upload"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "储存桶id",
+                        "name": "bucketID",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "oss路径",
+                        "name": "path",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "上传成功"
+                    },
+                    "400": {
+                        "description": "上传失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/script": {
+            "get": {
+                "description": "根据脚本名获取脚本",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "script"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "名称",
+                        "name": "scriptName",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "添加脚本",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "script"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "名称",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "内容",
+                        "name": "content",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/setting": {
+            "post": {
+                "description": "修改设置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "setting"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "key=路径",
+                        "name": "key",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "val=值",
+                        "name": "val",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.CorsConfiguration"
+                        }
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/setting/corsConfiguration": {
+            "get": {
+                "description": "获取跨域设置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "setting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.CorsConfiguration"
+                        }
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/setting/environmentConfig": {
+            "get": {
+                "description": "获取环境变量设置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "setting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.EnvironmentConfig"
+                        }
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/setting/securityConfig": {
+            "get": {
+                "description": "获取安全设置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "setting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.SecurityConfig"
+                        }
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/setting/systemConfig": {
+            "get": {
+                "description": "获取系统设置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "setting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.SystemConfig"
+                        }
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/setting/versionConfig": {
+            "get": {
+                "description": "获取版本设置",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "setting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/domain.VersionConfig"
+                        }
+                    },
+                    "400": {
+                        "description": "获取失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/storageBucket": {
+            "get": {
+                "description": "查询存储信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "storageBucket"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.StorageBucketResult"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "查询失败"
+                    }
+                }
+            },
+            "put": {
+                "description": "修改存储信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "storageBucket"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "存储名称",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "开关",
+                        "name": "switch",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "存储配置",
+                        "name": "config",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功"
+                    },
+                    "400": {
+                        "description": "修改失败"
+                    }
+                }
+            },
+            "post": {
+                "description": "添加存储配置信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "storageBucket"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "存储名称",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "开关",
+                        "name": "switch",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "存储配置",
+                        "name": "config",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功"
+                    },
+                    "400": {
+                        "description": "添加失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/storageBucket/:id": {
+            "get": {
+                "description": "根据id获取",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "storageBucket"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "存储id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功"
+                    },
+                    "400": {
+                        "description": "删除失败"
+                    }
+                }
+            },
+            "delete": {
+                "description": "删除存储信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "storageBucket"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "存储id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功"
+                    },
+                    "400": {
+                        "description": "删除失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/wdg/barOnce": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "wdg"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "重启成功"
+                    },
+                    "400": {
+                        "description": "重启失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/wdg/close": {
+            "get": {
+                "description": "停止",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "wdg"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "停止成功"
+                    },
+                    "400": {
+                        "description": "停止失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/wdg/log": {
+            "get": {
+                "description": "查看日志",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "wdg"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "类型 1-wdg日志（9991），2-hook日志（9992）",
+                        "name": "type",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查看日志成功"
+                    },
+                    "400": {
+                        "description": "查看日志失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/wdg/reStart": {
+            "get": {
+                "description": "重启",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "wdg"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "重启成功"
+                    },
+                    "400": {
+                        "description": "重启失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/wdg/start": {
+            "get": {
+                "description": "启动",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "wdg"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "启动成功"
+                    },
+                    "400": {
+                        "description": "启动失败"
+                    }
+                }
+            }
+        },
+        "/api/v1/wdg/state": {
+            "get": {
+                "description": "查看状态",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "wdg"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "查看状态成功"
+                    },
+                    "400": {
+                        "description": "查看状态失败"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "domain.Active": {
+            "type": "object",
+            "properties": {
+                "dayActive": {
+                    "description": "日活跃信息",
+                    "$ref": "#/definitions/domain.UserData"
+                },
+                "monthActive": {
+                    "description": "月活跃信息",
+                    "$ref": "#/definitions/domain.UserData"
+                },
+                "thirtyActive": {
+                    "description": "近30天活跃数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.DayActive"
+                    }
+                },
+                "weekActive": {
+                    "description": "周活跃信息",
+                    "$ref": "#/definitions/domain.UserData"
+                }
+            }
+        },
+        "domain.AuthHome": {
+            "type": "object",
+            "properties": {
+                "sevenDayUser": {
+                    "description": "7日信息",
+                    "$ref": "#/definitions/domain.UserData"
+                },
+                "todayInsertUser": {
+                    "description": "当日用户信息",
+                    "$ref": "#/definitions/domain.UserData"
+                },
+                "totalUser": {
+                    "description": "总用户",
+                    "type": "integer"
+                }
+            }
+        },
+        "domain.Branding": {
+            "type": "object",
+            "properties": {
+                "darkLogoUrl": {
+                    "type": "string"
+                },
+                "logoUrl": {
+                    "type": "string"
+                },
+                "slogan": {
+                    "type": "string"
+                },
+                "style": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.Color": {
+            "type": "object",
+            "properties": {
+                "darkPrimaryColor": {
+                    "type": "string"
+                },
+                "isDarkModeEnabled": {
+                    "type": "boolean"
+                },
+                "primaryColor": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.CorsConfiguration": {
+            "type": "object",
+            "properties": {
+                "allowCredentials": {
+                    "description": "允许证书开关 0-开 1-关",
+                    "type": "boolean"
+                },
+                "allowedHeaders": {
+                    "description": "请求头部",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "allowedMethods": {
+                    "description": "允许方法 0-* 1-GET 2-POST 3-PUT",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "allowedOrigins": {
+                    "description": "允许域名",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "exposedHeaders": {
+                    "description": "排除头部",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "maxAge": {
+                    "description": "跨域时间(s)",
+                    "type": "integer"
+                }
+            }
+        },
+        "domain.DayActive": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "description": "人数",
+                    "type": "integer"
+                },
+                "dataString": {
+                    "description": "日期",
+                    "type": "string"
+                }
+            }
+        },
+        "domain.Depend": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.EnvironmentConfig": {
+            "type": "object",
+            "properties": {
+                "environmentList": {
+                    "description": "环境变量列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.EnvironmentDetail"
+                    }
+                },
+                "systemVariable": {
+                    "description": "系统变量",
+                    "type": "string"
+                }
+            }
+        },
+        "domain.EnvironmentDetail": {
+            "type": "object",
+            "properties": {
+                "dev": {
+                    "description": "开发环境",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "变量名",
+                    "type": "string"
+                },
+                "pro": {
+                    "description": "生产环境",
+                    "type": "string"
+                }
+            }
+        },
+        "domain.FbAuthentication": {
+            "type": "object",
+            "properties": {
+                "authSupplier": {
+                    "description": "验证供应商:openid、github、google",
+                    "type": "string"
+                },
+                "config": {
+                    "description": "身份验证配置对应的配置项：供应商id、appID、appSecret、服务发现地址、重定向url等",
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isDel": {
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "身份验证名称",
+                    "type": "string"
+                },
+                "switchState": {
+                    "description": "开关状态: 0-全部关闭 1-cookie 2-token 3-全部cookie、token都开启",
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.FbDataSource": {
+            "type": "object",
+            "properties": {
+                "config": {
+                    "description": "数据源对应的配置项：命名空间、请求配置、连接配置、文件路径、是否配置为外部数据源等",
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isDel": {
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "数据源名称",
+                    "type": "string"
+                },
+                "sourceType": {
+                    "description": "数据源类型: 1-db 2-rest 3-graphql 4-自定义",
+                    "type": "integer"
+                },
+                "switch": {
+                    "description": "开关 0-开 1-关",
+                    "type": "integer"
+                },
+                "updateTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.FbDataSourceResp": {
+            "type": "object",
+            "properties": {
+                "config": {
+                    "description": "数据源对应的配置项：命名空间、请求配置、连接配置、文件路径、是否配置为外部数据源等"
+                },
+                "createTime": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isDel": {
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "数据源名称",
+                    "type": "string"
+                },
+                "sourceType": {
+                    "description": "数据源类型: 1-db 2-rest 3-graphql 4-自定义",
+                    "type": "integer"
+                },
+                "switch": {
+                    "description": "开关 0-开 1-关",
+                    "type": "integer"
+                }
+            }
+        },
+        "domain.FbEnv": {
+            "type": "object",
+            "properties": {
+                "createTime": {
+                    "type": "string"
+                },
+                "devEnv": {
+                    "description": "开发环境",
+                    "type": "string"
+                },
+                "envType": {
+                    "description": "环境类型: 1-环境变量 2-系统变量",
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isDel": {
+                    "type": "integer"
+                },
+                "key": {
+                    "description": "环境变量key",
+                    "type": "string"
+                },
+                "proEnv": {
+                    "description": "生产环境",
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.FbOperations": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "description": "内容",
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "string"
+                },
+                "enable": {
+                    "description": "开关 true开 false关",
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isDel": {
+                    "type": "integer"
+                },
+                "isPublic": {
+                    "description": "状态 1公有 2私有",
+                    "type": "integer"
+                },
+                "legal": {
+                    "description": "是否合法 1合法 2非法",
+                    "type": "integer"
+                },
+                "method": {
+                    "description": "方法类型 GET、POST、PUT、DELETE",
+                    "type": "string"
+                },
+                "operationType": {
+                    "description": "请求类型 queries,mutations,subscriptions",
+                    "type": "string"
+                },
+                "remark": {
+                    "description": "说明",
+                    "type": "string"
+                },
+                "restUrl": {
+                    "description": "方法类型 GET、POST、PUT、DELETE",
+                    "type": "string"
+                },
+                "roleType": {
+                    "type": "string"
+                },
+                "roles": {
+                    "type": "string"
+                },
+                "title": {
+                    "description": "路径",
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.FbRole": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "角色编码",
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isDel": {
+                    "type": "integer"
+                },
+                "remark": {
+                    "description": "描述",
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.Home": {
+            "type": "object",
+            "properties": {
+                "homeApi": {
+                    "$ref": "#/definitions/domain.HomeApi"
+                },
+                "homeAuth": {
+                    "$ref": "#/definitions/domain.HomeAuth"
+                },
+                "homeDataSource": {
+                    "$ref": "#/definitions/domain.HomeDataSource"
+                },
+                "homeOss": {
+                    "$ref": "#/definitions/domain.HomeOss"
+                }
+            }
+        },
+        "domain.HomeApi": {
+            "type": "object",
+            "properties": {
+                "liveQueryTotal": {
+                    "description": "实时查询个数",
+                    "type": "integer"
+                },
+                "mutationsTotal": {
+                    "description": "更改个数",
+                    "type": "integer"
+                },
+                "queryTotal": {
+                    "description": "查询个数",
+                    "type": "integer"
+                },
+                "subscriptionsTotal": {
+                    "description": "订阅个数",
+                    "type": "integer"
+                }
+            }
+        },
+        "domain.HomeAuth": {
+            "type": "object",
+            "properties": {
+                "authTotal": {
+                    "description": "累计身份验证商",
+                    "type": "integer"
+                },
+                "todayInsertUser": {
+                    "description": "今日新增用户",
+                    "type": "integer"
+                },
+                "totalUser": {
+                    "description": "累计用户",
+                    "type": "integer"
+                }
+            }
+        },
+        "domain.HomeBulletin": {
+            "type": "object",
+            "properties": {
+                "bulletinType": {
+                    "type": "integer"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.HomeDataSource": {
+            "type": "object",
+            "properties": {
+                "CustomerTotal": {
+                    "description": "自定义个数",
+                    "type": "integer"
+                },
+                "GraphqlTotal": {
+                    "description": "graphql个数",
+                    "type": "integer"
+                },
+                "RestTotal": {
+                    "description": "rest个数",
+                    "type": "integer"
+                },
+                "dbTotal": {
+                    "description": "db个数",
+                    "type": "integer"
+                }
+            }
+        },
+        "domain.HomeOss": {
+            "type": "object",
+            "properties": {
+                "ossTotal": {
+                    "description": "oss存储个数",
+                    "type": "integer"
+                },
+                "totalMemory": {
+                    "description": "总内存",
+                    "type": "string"
+                },
+                "useMemory": {
+                    "description": "已使用内存",
+                    "type": "string"
+                }
+            }
+        },
+        "domain.HookStruct": {
+            "type": "object",
+            "properties": {
+                "depend": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.Depend"
+                    }
+                },
+                "input": {},
+                "path": {
+                    "description": "钩子的路径 钩子分四种operation、auth、customize、global 以这4个为一级目录，二级目录为钩子的类型(operation的则以operation的名称为二级目录，钩子类型为三级目录)",
+                    "type": "string"
+                },
+                "script": {
+                    "type": "string"
+                },
+                "scriptType": {
+                    "type": "string"
+                },
+                "switch": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.Hooks": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "fileName": {
+                    "type": "string"
+                },
+                "hookName": {
+                    "type": "string"
+                },
+                "hookSwitch": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "domain.Linker": {
+            "type": "object",
+            "properties": {
+                "config": {
+                    "description": "配置的数据结构,每个链接器配置的结构都不一样"
+                },
+                "configTemplate": {
+                    "description": "配置模板,用于渲染配置页面 生产的配置对应config字段",
+                    "type": "string"
+                },
+                "createdAt": {
+                    "description": "创建时间，时间戳",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "描述",
+                    "type": "string"
+                },
+                "enabled": {
+                    "description": "是否创建 true-已创建 false-未创建",
+                    "type": "boolean"
+                },
+                "id": {
+                    "description": "链接器id 比如alipay-web, alipay-Native等等，该字段是通过target和platform拼接得到的",
+                    "type": "string"
+                },
+                "logo": {
+                    "description": "logo的url",
+                    "type": "string"
+                },
+                "logoDark": {
+                    "description": "深色模式下的logo",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "名称 如支付宝，微信等",
+                    "type": "string"
+                },
+                "platform": {
+                    "description": "平台类型，如Web、Native等",
+                    "type": "string"
+                },
+                "target": {
+                    "description": "标签,如:alipay、weChat、QQ等",
+                    "type": "string"
+                },
+                "types": {
+                    "description": "类型，如:Social和SMS",
+                    "type": "string"
+                }
+            }
+        },
+        "domain.LoginBrandConfig": {
+            "type": "object",
+            "properties": {
+                "branding": {
+                    "$ref": "#/definitions/domain.Branding"
+                },
+                "color": {
+                    "$ref": "#/definitions/domain.Color"
+                }
+            }
+        },
+        "domain.LoginConfig": {
+            "type": "object",
+            "properties": {
+                "signInMethods": {
+                    "$ref": "#/definitions/domain.SignInMethods"
+                },
+                "signInMode": {
+                    "type": "string"
+                },
+                "socialSignInConnectorTargets": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "socials": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.Social"
+                    }
+                }
+            }
+        },
+        "domain.LoginOtherConfig": {
+            "type": "object",
+            "properties": {
+                "contentUrl": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "domain.Mock": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "mockSwitch": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "domain.OauthUserResp": {
+            "type": "object",
+            "properties": {
+                "createTime": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "邮箱",
+                    "type": "string"
+                },
+                "encryptionPassword": {
+                    "description": "加密后密码",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "id",
+                    "type": "string"
+                },
+                "is_del": {
+                    "description": "是否删除",
+                    "type": "integer"
+                },
+                "lastLoginTime": {
+                    "description": "最后一次登陆时间",
+                    "type": "string"
+                },
+                "mateData": {
+                    "description": "其他信息(json字符串保存)",
+                    "type": "string"
+                },
+                "mobile": {
+                    "description": "手机号",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "姓名",
+                    "type": "string"
+                },
+                "nickName": {
+                    "description": "昵称",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "状态",
+                    "type": "integer"
+                },
+                "updateTime": {
+                    "description": "修改时间",
+                    "type": "string"
+                },
+                "userName": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "domain.OperationSetting": {
+            "type": "object",
+            "properties": {
+                "authenticationRequired": {
+                    "description": "需要授权",
+                    "type": "boolean"
+                },
+                "cachingEnable": {
+                    "description": "开启缓存",
+                    "type": "boolean"
+                },
+                "cachingMaxAge": {
+                    "description": "最大时长",
+                    "type": "integer"
+                },
+                "cachingStaleWhileRevalidate": {
+                    "description": "重校验时长",
+                    "type": "integer"
+                },
+                "liveQueryEnable": {
+                    "description": "开启实时",
+                    "type": "boolean"
+                },
+                "liveQueryPollingIntervalSeconds": {
+                    "description": "轮询间隔",
+                    "type": "integer"
+                }
+            }
+        },
+        "domain.S3UploadProvider": {
+            "type": "object",
+            "properties": {
+                "accessKeyID": {
+                    "type": "string"
+                },
+                "bucketLocation": {
+                    "type": "string"
+                },
+                "bucketName": {
+                    "type": "string"
+                },
+                "endpoint": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "secretAccessKey": {
+                    "type": "string"
+                },
+                "useSSL": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "domain.SecurityConfig": {
+            "type": "object",
+            "properties": {
+                "allowedHosts": {
+                    "description": "允许主机,多个域名",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "enableGraphQLEndpoint": {
+                    "description": "GraphQL端点 0-关 1-开",
+                    "type": "boolean"
+                }
+            }
+        },
+        "domain.SignInMethods": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "sms": {
+                    "type": "string"
+                },
+                "social": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.Social": {
+            "type": "object",
+            "properties": {
+                "logo": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "platform": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.StorageBucketResult": {
+            "type": "object",
+            "properties": {
+                "config": {
+                    "description": "配置",
+                    "$ref": "#/definitions/domain.S3UploadProvider"
+                },
+                "createTime": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isDel": {
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "名称",
+                    "type": "string"
+                },
+                "switch": {
+                    "description": "开关: 0-关 1-开",
+                    "type": "integer"
+                },
+                "updateTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.SystemConfig": {
+            "type": "object",
+            "properties": {
+                "apiPort": {
+                    "description": "api端口",
+                    "type": "string"
+                },
+                "debugSwitch": {
+                    "description": "调试开关 0-关 1-开",
+                    "type": "boolean"
+                },
+                "devSwitch": {
+                    "description": "开发者模式开关 true开 false关 0-开(debug模式 用up 启动) 1-关(生产模式，用start启动)",
+                    "type": "boolean"
+                },
+                "forcedJumpSwitch": {
+                    "description": "强制跳转 强制重定向跳转，开启后强制使用https协议",
+                    "type": "boolean"
+                },
+                "logLevel": {
+                    "description": "日志水平 0-Info 1-debug 2-error",
+                    "type": "string"
+                },
+                "middlewarePort": {
+                    "description": "中间件端口",
+                    "type": "string"
+                }
+            }
+        },
+        "domain.UploadedFile": {
+            "type": "object",
+            "properties": {
+                "createTime": {
+                    "type": "string"
+                },
+                "isDir": {
+                    "type": "boolean"
+                },
+                "mime": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "size": {
+                    "type": "integer"
+                },
+                "updateTime": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.UserData": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "description": "新增数量",
+                    "type": "integer"
+                },
+                "upCount": {
+                    "description": "对比前个时间段新增数量",
+                    "type": "integer"
+                }
+            }
+        },
+        "domain.VersionConfig": {
+            "type": "object",
+            "properties": {
+                "copyright": {
+                    "description": "版权",
+                    "type": "string"
+                },
+                "prismaVersion": {
+                    "description": "prisma版本",
+                    "type": "string"
+                },
+                "versionNum": {
+                    "description": "版本号",
+                    "type": "string"
+                }
+            }
+        },
+        "http.ExampleDataSource": {
+            "type": "object",
+            "properties": {
+                "config": {
+                    "$ref": "#/definitions/domain.FbDataSourceResp"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "remark": {
+                    "type": "string"
+                }
+            }
+        },
+        "http.OauthUserDetailResp": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "description": "所在地",
+                    "type": "string"
+                },
+                "birthday": {
+                    "description": "生日",
+                    "type": "string"
+                },
+                "city": {
+                    "description": "城市",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "国家",
+                    "type": "string"
+                },
+                "countryCode": {
+                    "description": "国家代码",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "邮箱",
+                    "type": "string"
+                },
+                "externalId": {
+                    "description": "原系统id",
+                    "type": "string"
+                },
+                "gender": {
+                    "description": "性别",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "id",
+                    "type": "string"
+                },
+                "jsonString": {
+                    "description": "原始json",
+                    "type": "string"
+                },
+                "mobile": {
+                    "description": "手机号",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "姓名",
+                    "type": "string"
+                },
+                "nickName": {
+                    "description": "昵称",
+                    "type": "string"
+                },
+                "postalCode": {
+                    "description": "邮政编码",
+                    "type": "string"
+                },
+                "province": {
+                    "description": "省/直辖市(手填)",
+                    "type": "string"
+                },
+                "streetAddress": {
+                    "description": "街道地址",
+                    "type": "string"
+                },
+                "userName": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "http.OauthUserLimitResp": {
+            "type": "object",
+            "properties": {
+                "currPage": {
+                    "description": "当前页",
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "description": "每页大小",
+                    "type": "integer"
+                },
+                "totalSize": {
+                    "description": "总页数",
+                    "type": "integer"
+                },
+                "userList": {
+                    "description": "用户列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.OauthUserResp"
+                    }
+                }
+            }
+        },
+        "http.TablesResp": {
+            "type": "object",
+            "properties": {
+                "exist": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "notExist": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "http.dirTreeNodeResp": {
+            "type": "object",
+            "properties": {
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/http.dirTreeNodeResp"
+                    }
+                },
+                "content": {
+                    "description": "内容",
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "string"
+                },
+                "enable": {
+                    "description": "开关 true开 false关",
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isDel": {
+                    "type": "integer"
+                },
+                "isDir": {
+                    "description": "是否是文件夹",
+                    "type": "boolean"
+                },
+                "isPublic": {
+                    "description": "状态 1公有 2私有",
+                    "type": "boolean"
+                },
+                "legal": {
+                    "description": "是否合法 1合法 2非法",
+                    "type": "boolean"
+                },
+                "method": {
+                    "description": "方法类型 GET、POST、PUT、DELETE",
+                    "type": "string"
+                },
+                "operationType": {
+                    "description": "请求类型 queries,mutations,subscriptions",
+                    "type": "string"
+                },
+                "path": {
+                    "description": "路径",
+                    "type": "string"
+                },
+                "remark": {
+                    "description": "说明",
+                    "type": "string"
+                },
+                "restUrl": {
+                    "description": "方法类型 GET、POST、PUT、DELETE",
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
