@@ -1,0 +1,64 @@
+.idea/
+.vscode/
+./main
+*.out
+*.exe
+main
+*wdg.txt
+
+static/sdk
+generated/
+static/config
+static/draft
+static/front
+static/log
+static/operateapi
+static/prismaEngine
+static/schema
+static/setting
+static/upload
+sql
+
+wundergraph/.wundergraph/hooks
+wundergraph/.wundergraph/new_hooks
+wundergraph/.wundergraph/operations/*
+
+
+
+
+# WunderGraph build output
+wundergraph/.wundergraph/generated
+
+# dependencies
+wundergraph/node_modules
+wundergraph/.pnp
+wundergraph/.pnp.js
+
+# testing
+wundergraph/coverage
+
+# next.js
+wundergraph/.next/
+wundergraph/out/
+
+# production
+wundergraph/build
+
+# misc
+wundergraph/.DS_Store
+wundergraph/*.pem
+
+# debug
+wundergraph/npm-debug.log*
+wundergraph/yarn-debug.log*
+wundergraph/yarn-error.log*
+
+# local env files
+wundergraph/.env.local
+wundergraph/.env.development.local
+wundergraph/.env.test.local
+wundergraph/.env.production.local
+
+# vercel
+wundergraph/.vercel
+main.exe
