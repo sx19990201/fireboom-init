@@ -1,15 +1,28 @@
-# node_model
-cd wundergraph && yarn
+# fireboom startup shell
 
-# 启动
-wget https://markdown-file-1259215954.cos.ap-nanjing.myqcloud.com/fireboom
-cd ..  && ./fireboom
+## Install
 
+```shell
+git clone https://github.com/sx19990201/fireboom-init.git
+cd fireboom-init
+./fireboom.sh init
+```
 
+## Run
 
+```shell
+./fireboom.sh
+# or run "./fireboom.sh init" to re-init
+```
 
-git clone https://github.com/sx19990201/fireboom-init 
-cd fireboom-init/wundergraph && yarn
-cd ..
-wget https://markdown-file-1259215954.cos.ap-nanjing.myqcloud.com/fireboom
-./fireboom
+## Update
+
+```shell
+./fireboom.sh update
+```
+
+## Show versions
+
+```shell
+./fireboom.sh version
+```

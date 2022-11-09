@@ -1,5 +1,6 @@
 .idea/
 .vscode/
+.history
 ./main
 *.out
 *.exe
@@ -20,11 +21,12 @@ static/upload
 sql
 
 wundergraph/.wundergraph/hooks
-wundergraph/.wundergraph/new_hooks
+wundergraph/.wundergraph/new_hook
 wundergraph/.wundergraph/operations/*
 
-
-
+wundergraph/.wundergraph/wundergraph.config.ts
+wundergraph/.wundergraph/wundergraph.operations.ts
+wundergraph/.wundergraph/wundergraph.server.ts
 
 # WunderGraph build output
 wundergraph/.wundergraph/generated
@@ -62,3 +64,10 @@ wundergraph/.env.production.local
 # vercel
 wundergraph/.vercel
 main.exe
+
+# fireboom-db
+fireBoom-DB
+
+# bin files
+fireboom
+wunderctl
