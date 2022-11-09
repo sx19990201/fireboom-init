@@ -1,1 +1,0 @@
-const u="Sms",E="Social",A="Email",F={[u]:"\u77ED\u4FE1\u8FDE\u63A5\u5668",[E]:"\u793E\u4EA4\u8FDE\u63A5\u5668",[A]:"\u90AE\u4EF6\u8FDE\u63A5\u5668"},n={[u]:"\u8BBE\u7F6E\u77ED\u4FE1\u8FDE\u63A5\u5668",[E]:"\u6DFB\u52A0\u793E\u4EA4\u8FDE\u63A5\u5668",[A]:"\u8BBE\u7F6E\u90AE\u4EF6\u8FDE\u63A5\u5668"};export{F as C,A as E,u as S,E as a,n as b};
